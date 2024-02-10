@@ -29,6 +29,8 @@ export default function Home() {
 npm i nativewind@2.0.11
 npm i tailwindcss@3.2.2 --save-dev
 npx tailwindcss init
+# permite aplicar classes condicionamente
+npm i clsx
 ```
 - tailwind config
 ```tsx
@@ -111,3 +113,41 @@ module.exports = {
   },
 }
 ```
+
+# Criar componente clicável
+```tsx
+<TouchableOpacity className="relative" activeOpacity={0.7}>
+  <View className="bg-lime-300 w-4 h-4 rounded-full items-center justify-center top-2 z-10 -right-3.5">
+    <Text className="text-slate-900 font-bold text-xs">{cartQuantityItems}</Text>
+  </View>
+  <Feather name="shopping-bag" color={colors.white} size={24}/>
+</TouchableOpacity>
+```
+
+## Pressable vs TouchableOpacity
+- Pressable é componente pra toque, porém não tem efeito visual de opacidade
+
+# Componentes react native
+- FlatList
+  - lista de elementos
+```tsx
+<FlatList 
+  data={CATEGORIES}
+  keyExtractor={(item) => item}
+  renderItem={({ item }) => <CategoryButtom title={item} isSelected />}
+  horizontal
+  contentContainerStyle={{ gap: 12, paddingHorizontal: 20 }}
+  showsHorizontalScrollIndicator={false}
+/>
+```
+- View
+  - como se fosse div html
+- Text
+  - represnta um texto
+- Image
+  - representa uma imagem
+```tsx
+<Image source={require("@/assets/logo.png")} />
+```
+- Pressable vs TouchableOpacity
+  - elementos clicaveis
