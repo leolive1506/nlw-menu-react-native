@@ -151,3 +151,19 @@ module.exports = {
 ```
 - Pressable vs TouchableOpacity
   - elementos clicaveis
+
+- SectionList
+  - seção de elementos
+```tsx
+<SectionList 
+  ref={sectionListRef}
+  sections={MENU}
+  keyExtractor={(item) => item.id}
+  stickySectionHeadersEnabled={false}
+  renderSectionHeader={({ section: { title } }) => <Text className="text-xl text-white font-heading mt-8 mb-3">{title}</Text>}
+  renderItem={({ item }) => <Product data={item} />}
+  className="flex-1 p-5"
+  showsVerticalScrollIndicator={false}
+  contentContainerStyle={{ paddingBottom: 100 }}
+/>
+```
