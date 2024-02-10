@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { View, FlatList, SectionList, Text } from "react-native";
+import { Link } from "expo-router";
 import { CategoryButtom } from "@/components/category-buttom";
 import { Header } from "@/components/header";
 import { Product } from "@/components/product";
@@ -40,7 +41,11 @@ export default function Home() {
         keyExtractor={(item) => item.id}
         stickySectionHeadersEnabled={false}
         renderSectionHeader={({ section: { title } }) => <Text className="text-xl text-white font-heading mt-8 mb-3">{title}</Text>}
-        renderItem={({ item }) => <Product data={item} />}
+        renderItem={({ item }) => (
+          <Link href={`/product/${item.id}`} asChild>
+            <Product data={item} />
+          </Link>
+        )}
         className="flex-1 p-5"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 100 }}

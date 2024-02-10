@@ -1,3 +1,56 @@
+# Composição de componente
+```tsx
+import { ReactNode } from "react";
+import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
+
+interface ButtonProps extends TouchableOpacityProps {
+  children: ReactNode
+}
+
+interface ButtonTextProps {
+  children: ReactNode
+}
+
+interface ButtonIconProps {
+  children: ReactNode
+}
+
+function Button({ children, ...rest }: ButtonProps) {
+  return (
+    <TouchableOpacity
+      className="h-12 bg-lime-400 rounded-md items-center justify-center flex-row"
+      activeOpacity={0.7}
+      {...rest}
+    >
+      {children}
+    </TouchableOpacity>
+  )
+}
+
+function ButtonText({ children }: ButtonTextProps) {
+  return (
+    <Text className="text-black font-heading text-base mx-2">
+      {children}
+    </Text>
+  )
+}
+
+function ButtonIcon({ children }: ButtonTextProps) {
+  return children
+}
+
+Button.Text = ButtonText
+Button.Icon = ButtonIcon
+export { Button }
+```
+```tsx
+<Button>
+  <Button.Icon>
+    <Feather name="plus-circle" size={20} />
+  </Button.Icon>
+  <Button.Text>Adicionar ao pedido</Button.Text>
+</Button>
+```
 # app.json
 - informações da aplicação
 # src/app
@@ -127,6 +180,40 @@ module.exports = {
 ## Pressable vs TouchableOpacity
 - Pressable é componente pra toque, porém não tem efeito visual de opacidade
 
+# Rotas
+- dentro app 
+  - product/[id].tsx
+```tsx
+import { View } from "react-native";
+import { useLocalSearchParams } from 'expo-router'
+
+export default function Product() {
+  const { id } = useLocalSearchParams()
+  return (
+    <View className="flex-1">
+
+    </View>
+  )
+}
+```
+- link para navegar
+```tsx
+ <Link href={`/product/${item.id}`} asChild>
+  <Product data={item} />
+</Link>
+```
+- componente usado como link
+```tsx
+import { forwardRef } from "react";
+export const Product = forwardRef<TouchableOpacity, ProductProps>(
+  ({ data, ...rest }, ref
+) => {
+  return (
+    <TouchableOpacity ref={ref} className="w-full flex-row items-center pb-4" {...rest}>
+    </TouchableOpacity>
+  )
+})
+```
 # Componentes react native
 - FlatList
   - lista de elementos
