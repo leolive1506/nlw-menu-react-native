@@ -51,6 +51,22 @@ export { Button }
   <Button.Text>Adicionar ao pedido</Button.Text>
 </Button>
 ```
+
+# Trabalhando com estados globais
+## [Lib zustand](https://zustand-demo.pmnd.rs/)
+```tsx
+import { create } from "zustand"
+import * as cartInMemory from "./helpers/cart-in-memory"
+
+export const useCartStore = create<StateProps>(set => ({
+  products: [],
+  add: (product: ProductProps) => set((state) => ({
+    products: cartInMemory.add(state.products, product)
+  }))
+}))
+// use: const cartStore = useCartStore()
+```
+
 # app.json
 - informações da aplicação
 # src/app
@@ -213,6 +229,15 @@ export const Product = forwardRef<TouchableOpacity, ProductProps>(
     </TouchableOpacity>
   )
 })
+```
+- redirecionar
+```tsx
+import { useLocalSearchParams, useNavigation } from 'expo-router'
+const navigation = useNavigation()
+function handleAddToCart() {
+  cartStore.add(product)
+  navigation.goBack()
+}
 ```
 # Componentes react native
 - FlatList
