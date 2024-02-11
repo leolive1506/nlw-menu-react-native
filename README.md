@@ -285,3 +285,9 @@ function handleAddToCart() {
   contentContainerStyle={{ paddingBottom: 100 }}
 />
 ```
+
+# Dicar gerais
+- ao clicar input, android empurra tela pra cima, mas nem sempre IOS consegue fazer isso
+```sh
+npm i react-native-keyboard-aware-scroll-view --save
+```
