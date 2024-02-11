@@ -232,8 +232,14 @@ export const Product = forwardRef<TouchableOpacity, ProductProps>(
 ```
 - redirecionar
 ```tsx
-import { useLocalSearchParams, useNavigation } from 'expo-router'
+import { useLocalSearchParams, useNavigation, Redirect } from 'expo-router'
 const navigation = useNavigation()
+// 1. forma
+if (!product) {
+  return <Redirect href="/" />
+}
+
+// 2. form
 function handleAddToCart() {
   cartStore.add(product)
   navigation.goBack()
