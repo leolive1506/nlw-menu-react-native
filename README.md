@@ -291,3 +291,28 @@ function handleAddToCart() {
 ```sh
 npm i react-native-keyboard-aware-scroll-view --save
 ```
+
+# [Expo asyn storage](https://docs.expo.dev/versions/latest/sdk/async-storage/)
+- Armazenar dados no aparelho
+```sh
+npx expo install @react-native-async-storage/async-storage
+```
+```tsx
+// persist -> mesmo se fechar ou recarregar informação ficar no carrinho
+import { createJSONStorage, persist } from "zustand/middleware"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+export const useCartStore = create(
+  persist<StateProps>(
+    set => ({
+    products: [],
+    add: (product: ProductProps) => set((state) => ({
+      products: cartInMemory.add(state.products, product)
+    })),
+    remove: (productId: string) => set((state) => ({
+      products: cartInMemory.remove(state.products, productId)
+    }))
+}), {
+  name: "nlw-experts:cart",
+  storage: createJSONStorage(() => AsyncStorage)
+}))
+```
