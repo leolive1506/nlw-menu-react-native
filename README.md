@@ -2,6 +2,7 @@
 Um aplicativo desenvolvido em react native para fazer pedido de comida
 
 ## Demonstração
+https://github.com/leolive1506/nlw-menu-react-native/assets/89431704/242578eb-6012-46d4-98fa-ff8ae589c5e3
 
 
 ## 🔗 Links
